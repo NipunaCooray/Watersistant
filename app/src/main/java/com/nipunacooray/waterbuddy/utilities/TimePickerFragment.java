@@ -25,9 +25,5 @@ public class TimePickerFragment extends DialogFragment {
                 DateFormat.is24HourFormat(getActivity()));
     }
 
-    public void onTimeSet(TimePickerFragment view, int hourOfDay, int minute) {
-        // Do something with the time chosen by the user
-    }
-
 
 }

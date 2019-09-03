@@ -8,21 +8,44 @@ import android.content.Intent;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.Adapter;
+import android.widget.TextView;
 import android.widget.TimePicker;
 
+import com.nipunacooray.waterbuddy.adapters.MainAdapter;
 import com.nipunacooray.waterbuddy.utilities.AlarmReceiver;
 import com.nipunacooray.waterbuddy.utilities.NotificationUtils;
 import com.nipunacooray.waterbuddy.utilities.TimePickerFragment;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener {
+
+    List<String> itemList = new ArrayList<>();
+    RecyclerView mRecyclerView;
+    MainAdapter mainAdapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+
+        mRecyclerView.setLayoutManager(layoutManager);
+        mRecyclerView.setHasFixedSize(true);
+
+        mainAdapter = new MainAdapter();
+        mRecyclerView.setAdapter(mainAdapter);
+        mainAdapter.setDateList(itemList);
+
 
     }
 
@@ -54,6 +77,12 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         c.set(Calendar.HOUR_OF_DAY, hourOfDay);
         c.set(Calendar.MINUTE, minute);
         c.set(Calendar.SECOND, 0);
+
+        itemList.add(c.getTime().toString());
         startAlarm(c);
+
+        mainAdapter.notifyDataSetChanged();
     }
+
+
 }
