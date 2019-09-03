@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Watersistant</string>
+    <string name="main_notification_channel_name">Primary</string>
+    <string name="reminder_notification_title"> Where\'s that water?</string>
+    <string name="reminder_notification_body"> There\'s never a better time to drink water than now. Drink up!</string>
+
+
+    <string name="reminder_btn_text"> Set next reminder</string>
+</resources>
